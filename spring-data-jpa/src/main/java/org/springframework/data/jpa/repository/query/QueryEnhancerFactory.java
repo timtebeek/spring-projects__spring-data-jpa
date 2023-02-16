@@ -43,6 +43,8 @@ public final class QueryEnhancerFactory {
 
 		if (qualifiesForJSqlParserUsage(query)) {
 			return new JSqlParserQueryEnhancer(query);
+		} else if (qualifiesForJpqlParserUsage(query)) {
+			return new Jpql31ParserQueryEnhancer(query);
 		} else {
 			return new DefaultQueryEnhancer(query);
 		}
@@ -57,6 +59,10 @@ public final class QueryEnhancerFactory {
 	 */
 	private static boolean qualifiesForJSqlParserUsage(DeclaredQuery query) {
 		return JSQLPARSER_IN_CLASSPATH && query.isNativeQuery();
+	}
+
+	private static boolean qualifiesForJpqlParserUsage(DeclaredQuery query) {
+		return !query.isNativeQuery();
 	}
 
 	/**

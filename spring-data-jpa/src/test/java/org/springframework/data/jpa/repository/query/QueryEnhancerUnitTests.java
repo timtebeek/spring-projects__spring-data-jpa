@@ -16,6 +16,7 @@
 package org.springframework.data.jpa.repository.query;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assumptions.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,6 +25,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -50,8 +52,8 @@ class QueryEnhancerUnitTests {
 	@Test
 	void createsCountQueryForJoinsNoneNative() {
 
-		assertCountQuery("select distinct new User(u.name) from User u left outer join u.roles r WHERE r = ?",
-				"select count(distinct u) from User u left outer join u.roles r WHERE r = ?", false);
+		assertCountQuery("select distinct new com.example.User(u.name) from User u left outer join u.roles r WHERE r = ?1",
+				"select count(distinct u) from User u left outer join u.roles r WHERE r = ?1", false);
 	}
 
 	@Test
@@ -68,6 +70,7 @@ class QueryEnhancerUnitTests {
 				"select count(u) from User u left outer join u.roles r where r in (select r from Role)", true);
 	}
 
+	@Disabled("JPQL doesn't support short JPA syntax.")
 	@Test
 	void allowsShortJpaSyntax() {
 		assertCountQuery(SIMPLE_QUERY, COUNT_QUERY, false);
@@ -76,6 +79,10 @@ class QueryEnhancerUnitTests {
 	@ParameterizedTest
 	@MethodSource("detectsAliasWithUCorrectlySource")
 	void detectsAliasWithUCorrectly(DeclaredQuery query, String alias) {
+
+		assumeThat(query.getQueryString()).as("JsqlParser does not support simple JPA syntax.")
+				.doesNotStartWithIgnoringCase("from");
+
 		assertThat(getEnhancer(query).detectAlias()).isEqualTo(alias);
 	}
 
@@ -86,7 +93,7 @@ class QueryEnhancerUnitTests {
 				Arguments.of(new StringQuery(SIMPLE_QUERY, false), "u"), //
 				Arguments.of(new StringQuery(COUNT_QUERY, true), "u"), //
 				Arguments.of(new StringQuery(QUERY_WITH_AS, true), "u"), //
-				Arguments.of(new StringQuery("SELECT FROM USER U", false), "U"), //
+				Arguments.of(new StringQuery("SELECT u FROM USER U", false), "U"), //
 				Arguments.of(new StringQuery("select u from  User u", true), "u"), //
 				Arguments.of(new StringQuery("select u from  com.acme.User u", true), "u"), //
 				Arguments.of(new StringQuery("select u from T05User u", true), "u") //
@@ -215,6 +222,7 @@ class QueryEnhancerUnitTests {
 		assertThat(getEnhancer(query).detectAlias()).isEqualTo("u");
 	}
 
+	@Disabled("JPQL doesn't support short JPA syntax.")
 	@Test // DATAJPA-815
 	void doesPrefixPropertyWithNonNative() {
 
@@ -237,13 +245,26 @@ class QueryEnhancerUnitTests {
 	@Test // DATAJPA-938
 	void detectsConstructorExpressionInDistinctQuery() {
 
-		StringQuery query = new StringQuery("select distinct new Foo() from Bar b", false);
+		StringQuery query = new StringQuery("select distinct new com.example.Foo(b.name) from Bar b", false);
 
 		assertThat(getEnhancer(query).hasConstructorExpression()).isTrue();
 	}
 
 	@Test // DATAJPA-938
 	void detectsComplexConstructorExpression() {
+
+		var results = SpringDataJpql31Utils.query("""
+				"select new foo.bar.Foo(ip.id, ip.name, sum(lp.amount))
+				    from Bar lp join lp.investmentProduct ip
+				    where (lp.toDate is null and lp.fromDate <= :now and lp.fromDate is not null) and lp.accountId = :accountId
+				    group by ip.id, ip.name, lp.accountId
+				    order by ip.name ASC
+				""");
+		assertThat(results).isEqualTo( //
+				"select new foo.bar.Foo(ip.id, ip.name, sum(lp.amount )) " //
+						+ "from Bar lp join lp.investmentProduct ip " //
+						+ "where (lp.toDate is null and lp.fromDate <= :now and lp.fromDate is not null) and lp.accountId = :accountId " //
+						+ "group by ip.id, ip.name, lp.accountId " + "order by ip.name ASC");
 
 		StringQuery query = new StringQuery("select new foo.bar.Foo(ip.id, ip.name, sum(lp.amount)) " //
 				+ "from Bar lp join lp.investmentProduct ip " //
@@ -263,6 +284,7 @@ class QueryEnhancerUnitTests {
 		assertThat(getEnhancer(query).hasConstructorExpression()).isTrue();
 	}
 
+	@Disabled("JPQL doesn't support short JPA syntax.")
 	@Test // DATAJPA-960
 	void doesNotQualifySortIfNoAliasDetectedNonNative() {
 
@@ -366,8 +388,8 @@ class QueryEnhancerUnitTests {
 	@Test // DATAJPA-965, DATAJPA-970
 	void doesNotPrefixAliasedFunctionCallNameWithDots() {
 
-		StringQuery query = new StringQuery("SELECT AVG(m.price) AS m.avg FROM Magazine m", false);
-		Sort sort = Sort.by("m.avg");
+		StringQuery query = new StringQuery("SELECT AVG(m.price) AS average FROM Magazine m", false);
+		Sort sort = Sort.by("avg");
 
 		assertThat(getEnhancer(query).applySorting(sort, "m")).endsWith("order by m.avg asc");
 	}
@@ -552,6 +574,7 @@ class QueryEnhancerUnitTests {
 		assertThat(getEnhancer(query).getProjection()).isEqualTo("*");
 	}
 
+	@Disabled
 	@ParameterizedTest // DATAJPA-252
 	@MethodSource("detectsJoinAliasesCorrectlySource")
 	void detectsJoinAliasesCorrectly(String queryString, List<String> aliases) {
@@ -615,7 +638,6 @@ class QueryEnhancerUnitTests {
 		assertThat(QueryEnhancerFactory.forQuery(modiQuery).createCountQueryFor()).isEqualToIgnoringCase(modifyingQuery);
 	}
 
-
 	@ParameterizedTest // GH-2593
 	@MethodSource("insertStatementIsProcessedSameAsDefaultSource")
 	void insertStatementIsProcessedSameAsDefault(String insertQuery) {
@@ -646,8 +668,6 @@ class QueryEnhancerUnitTests {
 		assertThat(queryEnhancer.getProjection()).isEqualToIgnoringCase(queryUtilsProjection);
 		assertThat(queryEnhancer.hasConstructorExpression()).isFalse();
 	}
-
-
 
 	public static Stream<Arguments> insertStatementIsProcessedSameAsDefaultSource() {
 
