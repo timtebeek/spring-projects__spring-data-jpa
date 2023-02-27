@@ -24,7 +24,6 @@ import jakarta.persistence.metamodel.Attribute;
 import jakarta.persistence.metamodel.PluralAttribute;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.JpaSort.*;
@@ -33,8 +32,7 @@ import org.springframework.data.jpa.domain.sample.MailMessage_;
 import org.springframework.data.jpa.domain.sample.MailSender_;
 import org.springframework.data.jpa.domain.sample.User_;
 import org.springframework.lang.Nullable;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Integration tests for {@link JpaSort}. This has to be an integration test due to the design of the statically
@@ -47,8 +45,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Christoph Strobl
  * @author Jens Schauder
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:infrastructure.xml")
+@SpringJUnitConfig(locations = "classpath:infrastructure.xml")
 class JpaSortTests {
 
 	private static final @Nullable Attribute<?, ?> NULL_ATTRIBUTE = null;

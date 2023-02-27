@@ -37,7 +37,6 @@ import javax.sql.DataSource;
 
 import org.hibernate.dialect.PostgreSQL91Dialect;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -53,8 +52,7 @@ import org.springframework.orm.jpa.AbstractEntityManagerFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,8 +66,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
  * @author Yanming Zhou
  */
 @Transactional
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = PostgresStoredProcedureIntegrationTests.Config.class)
+@SpringJUnitConfig(classes = PostgresStoredProcedureIntegrationTests.Config.class)
 class PostgresStoredProcedureIntegrationTests {
 
 	@Autowired EmployeeRepositoryWithRefCursor repository;
@@ -155,12 +152,12 @@ class PostgresStoredProcedureIntegrationTests {
 	@NamedStoredProcedureQuery( //
 			name = "get_employees_postgres", //
 			procedureName = "get_employees", //
-			parameters = { @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class) }, //
+			parameters = {@StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class)}, //
 			resultClasses = Employee.class)
 	public static class Employee {
 
 		@Id
-		@GeneratedValue private Integer id;
+				@GeneratedValue private Integer id;
 		private String name;
 	}
 
@@ -198,7 +195,7 @@ class PostgresStoredProcedureIntegrationTests {
 	static class Config {
 
 		@SuppressWarnings("resource")
-		@Bean(initMethod = "start", destroyMethod = "stop")
+				@Bean(initMethod = "start", destroyMethod = "stop")
 		public PostgreSQLContainer<?> container() {
 
 			return new PostgreSQLContainer<>("postgres:9.6.12") //

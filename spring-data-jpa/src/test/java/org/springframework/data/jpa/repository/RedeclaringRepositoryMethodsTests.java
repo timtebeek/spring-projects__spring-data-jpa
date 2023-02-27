@@ -21,15 +21,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.sample.User;
 import org.springframework.data.jpa.repository.sample.RedeclaringRepositoryMethodsRepository;
 import org.springframework.data.jpa.repository.sample.SampleConfig;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -37,8 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Jens Schauder
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = SampleConfig.class)
+@SpringJUnitConfig(classes = SampleConfig.class)
 @Transactional
 class RedeclaringRepositoryMethodsTests {
 

@@ -35,7 +35,6 @@ import org.hibernate.Version;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -47,8 +46,7 @@ import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.core.support.DefaultRepositoryMetadata;
 import org.springframework.data.repository.query.Param;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Integration tests for {@link PartTreeJpaQuery}.
@@ -59,8 +57,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Jens Schauder
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:infrastructure.xml")
+@SpringJUnitConfig(locations = "classpath:infrastructure.xml")
 class PartTreeJpaQueryIntegrationTests {
 
 	private static String PROPERTY = "h.target." + getQueryProperty();
@@ -100,7 +97,7 @@ class PartTreeJpaQueryIntegrationTests {
 	}
 
 	@Test // DATAJPA-121
-	@Disabled // HHH-15432
+			@Disabled // HHH-15432
 	void recreatesQueryIfNullValueIsGiven() throws Exception {
 
 		JpaQueryMethod queryMethod = getQueryMethod("findByFirstname", String.class, Pageable.class);
@@ -127,7 +124,7 @@ class PartTreeJpaQueryIntegrationTests {
 	}
 
 	@Test // DATAJPA-920
-	@Disabled // HHH-15432
+			@Disabled // HHH-15432
 	void shouldSelectAliasedIdForExistsProjectionQueries() throws Exception {
 
 		JpaQueryMethod queryMethod = getQueryMethod("existsByFirstname", String.class);

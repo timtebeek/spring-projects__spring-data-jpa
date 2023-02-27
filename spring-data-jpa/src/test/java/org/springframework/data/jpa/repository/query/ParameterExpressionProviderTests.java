@@ -25,14 +25,12 @@ import jakarta.persistence.criteria.ParameterExpression;
 import java.lang.reflect.Method;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.data.jpa.domain.sample.User;
 import org.springframework.data.repository.query.DefaultParameters;
 import org.springframework.data.repository.query.Parameters;
 import org.springframework.data.repository.query.ParametersParameterAccessor;
 import org.springframework.data.repository.query.parser.Part;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Integration tests for {@link ParameterMetadataProvider}.
@@ -40,14 +38,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Oliver Gierke
  * @author Jens Schauder
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:infrastructure.xml")
+@SpringJUnitConfig(locations = "classpath:infrastructure.xml")
 class ParameterExpressionProviderTests {
 
 	@PersistenceContext EntityManager em;
 
 	@Test // DATADOC-99
-	@SuppressWarnings("rawtypes")
+			@SuppressWarnings("rawtypes")
 	void createsParameterExpressionWithMostConcreteType() throws Exception {
 
 		Method method = SampleRepository.class.getMethod("findByIdGreaterThan", int.class);

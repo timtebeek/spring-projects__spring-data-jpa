@@ -17,9 +17,7 @@ package org.springframework.data.jpa.repository.support;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * OpenJpa execution for {@link JpaMetamodelEntityInformationIntegrationTests}.
@@ -27,8 +25,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Oliver Gierke
  * @author Greg Turnquist
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration({ "classpath:infrastructure.xml", "classpath:openjpa.xml" })
+@SpringJUnitConfig(locations = {"classpath:infrastructure.xml", "classpath:openjpa.xml"})
 class OpenJpaMetamodelEntityInformationIntegrationTests extends JpaMetamodelEntityInformationIntegrationTests {
 
 	@Override
@@ -48,14 +45,14 @@ class OpenJpaMetamodelEntityInformationIntegrationTests extends JpaMetamodelEnti
 	 * Ignore as it fails with weird {@link NoClassDefFoundError}.
 	 */
 	@Override
-	@Disabled
+			@Disabled
 	void findsIdClassOnMappedSuperclass() {}
 
 	/**
 	 * Re-activate test for DATAJPA-820.
 	 */
 	@Test
-	@Override
+			@Override
 	void detectsVersionPropertyOnMappedSuperClass() {
 		super.detectsVersionPropertyOnMappedSuperClass();
 	}

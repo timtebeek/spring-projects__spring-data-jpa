@@ -21,7 +21,6 @@ import java.util.Iterator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.envers.Config;
@@ -30,8 +29,7 @@ import org.springframework.data.envers.sample.CountryQueryDslRepository;
 import org.springframework.data.envers.sample.QCountry;
 import org.springframework.data.history.Revision;
 import org.springframework.data.history.Revisions;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Integration tests for repositories with Querydsl support. They make sure that methods provided by both
@@ -40,8 +38,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Dmytro Iaroslavskyi
  * @author Jens Schauder
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = Config.class)
+@SpringJUnitConfig(classes = Config.class)
 class QueryDslRepositoryIntegrationTests {
 
 	@Autowired

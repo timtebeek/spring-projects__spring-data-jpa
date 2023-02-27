@@ -30,7 +30,6 @@ import org.hibernate.query.sqm.tree.expression.SqmFunction;
 import org.hibernate.query.sqm.tree.select.SqmSelectClause;
 import org.hibernate.query.sqm.tree.select.SqmSelectStatement;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.data.jpa.domain.sample.Role;
 import org.springframework.data.jpa.domain.sample.User;
 import org.springframework.data.jpa.provider.PersistenceProvider;
@@ -38,8 +37,7 @@ import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.core.support.AbstractRepositoryMetadata;
 import org.springframework.data.repository.query.parser.PartTree;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Integration tests for {@link JpaCountQueryCreator}.
@@ -47,8 +45,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Oliver Gierke
  * @author Jens Schauder
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:infrastructure.xml")
+@SpringJUnitConfig(locations = "classpath:infrastructure.xml")
 class JpaCountQueryCreatorIntegrationTests {
 
 	@PersistenceContext EntityManager entityManager;

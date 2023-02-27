@@ -57,7 +57,6 @@ import org.hibernate.LazyInitializationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -81,8 +80,7 @@ import org.springframework.data.jpa.domain.sample.User;
 import org.springframework.data.jpa.repository.sample.SampleEvaluationContextExtension.SampleSecurityContextHolder;
 import org.springframework.data.jpa.repository.sample.UserRepository;
 import org.springframework.data.jpa.repository.sample.UserRepository.NameOnly;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -108,8 +106,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Geoffrey Deremetz
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:application-context.xml")
+@SpringJUnitConfig(locations = "classpath:application-context.xml")
 @Transactional
 class UserRepositoryTests {
 
@@ -1323,7 +1320,7 @@ class UserRepositoryTests {
 	 * @see <a href="https://issues.apache.org/jira/browse/OPENJPA-2484">OPENJPA-2484</a>
 	 */
 	@Test // DATAJPA-505
-	@Disabled
+			@Disabled
 	void findBinaryDataByIdJpaQl() throws Exception {
 
 		byte[] data = "Woho!!".getBytes("UTF-8");

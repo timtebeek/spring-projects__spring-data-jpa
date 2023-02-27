@@ -21,7 +21,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -29,8 +28,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Primary;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Integration tests for {@link EntityManagerBeanDefinitionRegistrarPostProcessor}.
@@ -39,8 +37,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Jens Schauder
  * @author Réda Housni Alaoui
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration
+@SpringJUnitConfig
 class EntityManagerBeanDefinitionRegistrarPostProcessorIntegrationTests {
 
 	@Autowired EntityManagerInjectionTarget target;
@@ -76,7 +73,7 @@ class EntityManagerBeanDefinitionRegistrarPostProcessorIntegrationTests {
 		}
 
 		@Primary
-		@Bean
+				@Bean
 		EntityManagerFactory thirdEmf() {
 			return emf;
 		}

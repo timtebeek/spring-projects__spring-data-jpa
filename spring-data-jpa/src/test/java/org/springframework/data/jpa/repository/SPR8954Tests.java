@@ -20,27 +20,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.repository.sample.UserRepository;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean;
 import org.springframework.data.repository.core.support.RepositoryFactoryInformation;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * @author Jens Schauder
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:config/namespace-application-context.xml")
+@SpringJUnitConfig(locations = "classpath:config/namespace-application-context.xml")
 class SPR8954Tests {
 
 	@Autowired ApplicationContext context;
 
 	@Test
-	@SuppressWarnings("rawtypes")
+			@SuppressWarnings("rawtypes")
 	void canAccessRepositoryFactoryInformationFactoryBeans() {
 
 		Map<String, RepositoryFactoryInformation> repoFactories = context

@@ -33,7 +33,6 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,8 +42,7 @@ import org.springframework.data.jpa.domain.sample.Role;
 import org.springframework.data.jpa.domain.sample.User;
 import org.springframework.data.jpa.domain.sample.User_;
 import org.springframework.data.jpa.repository.sample.RepositoryMethodsWithEntityGraphConfigRepository;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -57,8 +55,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Jens Schauder
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:config/namespace-autoconfig-context.xml")
+@SpringJUnitConfig(locations = "classpath:config/namespace-autoconfig-context.xml")
 @Transactional
 class EntityGraphRepositoryMethodsIntegrationTests {
 
@@ -254,7 +251,7 @@ class EntityGraphRepositoryMethodsIntegrationTests {
 	}
 
 	@Test // DATAJPA-1041, DATAJPA-1075
-	@Disabled // likely broken due to the fixes made for HHH-15391
+			@Disabled // likely broken due to the fixes made for HHH-15391
 	void shouldCreateDynamicGraphWithMultipleLevelsOfSubgraphs() {
 
 		assumeThat(currentEntityManagerIsAJpa21EntityManager(em)).isTrue();

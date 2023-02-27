@@ -22,10 +22,8 @@ import java.io.Serializable;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.data.jpa.domain.AbstractPersistable;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * EclipseLink execution for {@link JpaMetamodelEntityInformationIntegrationTests}.
@@ -34,8 +32,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Jens Schauder
  * @author Greg Turnquist
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration({ "classpath:infrastructure.xml", "classpath:eclipselink.xml" })
+@SpringJUnitConfig(locations = {"classpath:infrastructure.xml", "classpath:eclipselink.xml"})
 class EclipseLinkJpaMetamodelEntityInformationIntegrationTests extends JpaMetamodelEntityInformationIntegrationTests {
 
 	@Override
@@ -57,14 +54,14 @@ class EclipseLinkJpaMetamodelEntityInformationIntegrationTests extends JpaMetamo
 	 * Ignored due to https://bugs.eclipse.org/bugs/show_bug.cgi?id=411231.
 	 */
 	@Override
-	@Disabled
+			@Disabled
 	void findsIdClassOnMappedSuperclass() {}
 
 	/**
 	 * Ignored due to https://bugs.eclipse.org/bugs/show_bug.cgi?id=415027
 	 */
 	@Override
-	@Disabled
+			@Disabled
 	void detectsNewStateForEntityWithPrimitiveId() {}
 
 	/**
@@ -72,11 +69,11 @@ class EclipseLinkJpaMetamodelEntityInformationIntegrationTests extends JpaMetamo
 	 * returns true when IdClass references an inner class. This bug is supposedly fixed, but the test still fails.
 	 */
 	@Disabled
-	@Test
-	@Override
+			@Test
+			@Override
 	void correctlyDeterminesIdValueForNestedIdClassesWithNonPrimitiveNonManagedType() {}
 
 	@Override
-	@Disabled
+			@Disabled
 	void prefersPrivateGetterOverFieldAccess() {}
 }

@@ -21,7 +21,6 @@ import java.lang.reflect.Method;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -37,8 +36,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.data.repository.core.RepositoryMetadata;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Tests that the requirement of binding an argument to a query can get controlled by a module extending Spring Data
@@ -46,8 +44,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  *
  * @author Réda Housni Alaoui
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration
+@SpringJUnitConfig
 class CustomNonBindableJpaParametersIntegrationTests {
 
 	@Autowired ProductRepository products;
@@ -123,7 +120,7 @@ class CustomNonBindableJpaParametersIntegrationTests {
 	@Configuration
 	@ImportResource("classpath:infrastructure.xml")
 	@EnableJpaRepositories(considerNestedRepositories = true, basePackageClasses = ProductRepository.class, //
-			includeFilters = @ComponentScan.Filter(value = { ProductRepository.class }, type = FilterType.ASSIGNABLE_TYPE))
+			includeFilters = @ComponentScan.Filter(value = {ProductRepository.class}, type = FilterType.ASSIGNABLE_TYPE))
 	static class Config {
 
 		@Bean

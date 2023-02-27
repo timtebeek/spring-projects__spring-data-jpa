@@ -18,7 +18,6 @@ package org.springframework.data.jpa.repository.config;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -26,8 +25,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.jpa.repository.sample.ClassWithNestedRepository.NestedUserRepository;
 import org.springframework.data.jpa.repository.sample.UserRepository;
 import org.springframework.data.repository.support.Repositories;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Integration test for the combination of JavaConfig and an {@link Repositories} wrapper.
@@ -36,8 +34,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Oliver Gierke
  * @author Jens Schauder
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration
+@SpringJUnitConfig
 class NestedRepositoriesJavaConfigTests {
 
 	@Autowired NestedUserRepository nestedUserRepository;

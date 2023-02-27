@@ -21,7 +21,6 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Auditable;
 import org.springframework.data.jpa.domain.sample.AnnotatedAuditableUser;
@@ -31,8 +30,7 @@ import org.springframework.data.jpa.domain.sample.AuditorAwareStub;
 import org.springframework.data.jpa.repository.sample.AnnotatedAuditableUserRepository;
 import org.springframework.data.jpa.repository.sample.AuditableUserRepository;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -42,8 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Jens Schauder
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:auditing/auditing-entity-listener.xml")
+@SpringJUnitConfig(locations = "classpath:auditing/auditing-entity-listener.xml")
 @Transactional
 @DirtiesContext
 class AuditingEntityListenerTests {

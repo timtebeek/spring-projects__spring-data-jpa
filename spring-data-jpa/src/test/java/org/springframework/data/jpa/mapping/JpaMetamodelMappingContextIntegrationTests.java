@@ -25,7 +25,6 @@ import org.hibernate.proxy.HibernateProxy;
 import org.hibernate.proxy.LazyInitializer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -41,8 +40,7 @@ import org.springframework.data.jpa.repository.sample.CategoryRepository;
 import org.springframework.data.jpa.repository.sample.ProductRepository;
 import org.springframework.data.mapping.IdentifierAccessor;
 import org.springframework.data.mapping.PersistentPropertyPaths;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -55,8 +53,7 @@ import org.springframework.transaction.support.TransactionTemplate;
  * @author Mark Paluch
  * @since 1.3
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration
+@SpringJUnitConfig
 class JpaMetamodelMappingContextIntegrationTests {
 
 	private JpaMetamodelMappingContext context;
@@ -190,7 +187,7 @@ class JpaMetamodelMappingContextIntegrationTests {
 	@Configuration
 	@ImportResource("classpath:infrastructure.xml")
 	@EnableJpaRepositories(basePackageClasses = CategoryRepository.class, //
-			includeFilters = @Filter(value = { CategoryRepository.class, ProductRepository.class },
+			includeFilters = @Filter(value = {CategoryRepository.class, ProductRepository.class},
 					type = FilterType.ASSIGNABLE_TYPE))
 	static class Config {
 

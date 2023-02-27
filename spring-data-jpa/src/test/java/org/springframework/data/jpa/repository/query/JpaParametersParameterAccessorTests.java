@@ -13,20 +13,17 @@ import java.lang.reflect.Method;
 import org.hibernate.query.TypedParameterValue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.springframework.data.jpa.domain.sample.User;
 import org.springframework.data.jpa.provider.PersistenceProvider;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Unit test for {@link JpaParametersParameterAccessor}.
  *
  * @author Wonchul Heo
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:infrastructure.xml")
+@SpringJUnitConfig(locations = "classpath:infrastructure.xml")
 class JpaParametersParameterAccessorTests {
 
 	@PersistenceContext private EntityManager em;

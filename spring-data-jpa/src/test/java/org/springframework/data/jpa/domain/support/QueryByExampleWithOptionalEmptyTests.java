@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
@@ -29,8 +28,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.domain.sample.UserWithOptionalField;
 import org.springframework.data.jpa.domain.sample.UserWithOptionalFieldRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Integration test for {@link org.springframework.data.repository.query.QueryByExampleExecutor} involving
@@ -38,8 +36,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  *
  * @author Greg Turnquist
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration
+@SpringJUnitConfig
 class QueryByExampleWithOptionalEmptyTests {
 
 	@Autowired UserWithOptionalFieldRepository repository;

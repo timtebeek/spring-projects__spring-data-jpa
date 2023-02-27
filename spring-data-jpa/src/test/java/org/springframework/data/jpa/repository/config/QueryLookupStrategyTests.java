@@ -19,15 +19,13 @@ import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.util.ReflectionTestUtils.*;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean;
 import org.springframework.data.repository.query.QueryLookupStrategy;
 import org.springframework.data.repository.query.QueryLookupStrategy.Key;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Integration test for XML configuration of {@link QueryLookupStrategy.Key}s.
@@ -36,8 +34,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Thomas Darimont
  * @author Jens Schauder
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = "classpath:config/lookup-strategies-context.xml")
+@SpringJUnitConfig(locations = "classpath:config/lookup-strategies-context.xml")
 class QueryLookupStrategyTests {
 
 	@Autowired ApplicationContext context;

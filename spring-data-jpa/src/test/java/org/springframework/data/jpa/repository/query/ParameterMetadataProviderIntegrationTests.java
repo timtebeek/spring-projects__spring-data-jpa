@@ -24,15 +24,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.data.jpa.domain.sample.User;
 import org.springframework.data.jpa.repository.query.ParameterMetadataProvider.ParameterMetadata;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.query.Parameters;
 import org.springframework.data.repository.query.parser.Part;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.util.ReflectionTestUtils;
 
 /**
@@ -42,8 +40,7 @@ import org.springframework.test.util.ReflectionTestUtils;
  * @author Jens Schauder
  * @soundtrack Elephants Crossing - We are (Irrelephant)
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:infrastructure.xml")
+@SpringJUnitConfig(locations = "classpath:infrastructure.xml")
 class ParameterMetadataProviderIntegrationTests {
 
 	@PersistenceContext EntityManager em;
@@ -83,7 +80,7 @@ class ParameterMetadataProviderIntegrationTests {
 		return new ParameterMetadataProvider(em.getCriteriaBuilder(), parameters, EscapeCharacter.DEFAULT);
 	}
 
-	@SuppressWarnings({ "unchecked", "ConstantConditions" })
+	@SuppressWarnings({"unchecked", "ConstantConditions"})
 	private static void simulateDiscoveredParametername(Parameters<?, ?> parameters) {
 
 		List<Object> list = (List<Object>) ReflectionTestUtils.getField(parameters, "parameters");

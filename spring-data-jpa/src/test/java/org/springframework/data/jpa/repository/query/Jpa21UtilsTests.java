@@ -34,13 +34,11 @@ import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.sample.User;
 import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
 import org.springframework.lang.Nullable;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -51,8 +49,7 @@ import org.springframework.util.ObjectUtils;
  * @author Jens Schauder
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:application-context.xml")
+@SpringJUnitConfig(locations = "classpath:application-context.xml")
 @Transactional
 class Jpa21UtilsTests {
 

@@ -31,10 +31,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.data.jpa.domain.sample.User;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -42,8 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Jens Schauder
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration({ "classpath:application-context.xml"
+@SpringJUnitConfig(locations = {"classpath:application-context.xml"
 // , "classpath:eclipselink.xml"
 // , "classpath:openjpa.xml"
 })
@@ -53,7 +50,7 @@ class SimpleJpaParameterBindingTests {
 	@PersistenceContext EntityManager em;
 
 	@Test
-	@Disabled
+			@Disabled
 	void bindArray() {
 
 		User user = new User("Dave", "Matthews", "foo@bar.de");
@@ -75,7 +72,7 @@ class SimpleJpaParameterBindingTests {
 	}
 
 	@Test
-	@SuppressWarnings("rawtypes")
+			@SuppressWarnings("rawtypes")
 	void bindCollection() {
 
 		User user = new User("Dave", "Matthews", "foo@bar.de");

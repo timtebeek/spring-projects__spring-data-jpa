@@ -23,7 +23,6 @@ import jakarta.persistence.EntityManager;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,8 +36,7 @@ import org.springframework.data.jpa.repository.sample.MappedTypeRepository;
 import org.springframework.data.jpa.repository.sample.SampleConfig;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -49,8 +47,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Krzysztof Krason
  */
 @Transactional
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = SampleConfig.class)
+@SpringJUnitConfig(classes = SampleConfig.class)
 class MappedTypeRepositoryIntegrationTests {
 
 	@Autowired ConcreteRepository1 concreteRepository1;
@@ -84,7 +81,7 @@ class MappedTypeRepositoryIntegrationTests {
 	}
 
 	@Test // DATAJPA-1535
-	@SuppressWarnings("unchecked")
+			@SuppressWarnings("unchecked")
 	void deletesConcreteInstancesForRepositoryBoundToMappedSuperclass() {
 
 		JpaRepositoryFactory factory = new JpaRepositoryFactory(entityManager);

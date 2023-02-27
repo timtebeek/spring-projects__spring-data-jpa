@@ -18,12 +18,10 @@ package org.springframework.data.jpa.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.sample.Role;
 import org.springframework.data.jpa.repository.sample.RoleRepository;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,8 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Jens Schauder
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = { "classpath:application-context.xml" })
+@SpringJUnitConfig(locations = {"classpath:application-context.xml"})
 @Transactional
 class RoleRepositoryIntegrationTests {
 

@@ -22,21 +22,18 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.sample.AuditableEmbeddable;
 import org.springframework.data.jpa.domain.sample.AuditableEntity;
 import org.springframework.data.jpa.repository.sample.AuditableEntityRepository;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Integration test for {@link AuditingEntityListener}.
  *
  * @author Greg Turnquist
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:auditing/auditing-entity-with-embeddable-listener.xml")
+@SpringJUnitConfig(locations = "classpath:auditing/auditing-entity-with-embeddable-listener.xml")
 class AuditingEntityWithEmbeddableListenerTests {
 
 	@Autowired AuditableEntityRepository repository;

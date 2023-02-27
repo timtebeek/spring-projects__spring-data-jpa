@@ -18,13 +18,11 @@ package org.springframework.data.jpa.repository;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.sample.CustomAbstractPersistable;
 import org.springframework.data.jpa.repository.sample.CustomAbstractPersistableRepository;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -33,8 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Jens Schauder
  */
 @Transactional
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = { "classpath:config/namespace-autoconfig-context.xml" })
+@SpringJUnitConfig(locations = {"classpath:config/namespace-autoconfig-context.xml"})
 class CustomAbstractPersistableIntegrationTests {
 
 	@Autowired CustomAbstractPersistableRepository repository;

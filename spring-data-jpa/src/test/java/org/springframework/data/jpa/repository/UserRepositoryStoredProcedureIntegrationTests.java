@@ -25,13 +25,11 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.StoredProcedureQuery;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.jpa.repository.sample.UserRepository;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -44,8 +42,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author JyotirmoyVS
  * @since 1.6
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:application-context.xml")
+@SpringJUnitConfig(locations = "classpath:application-context.xml")
 @Transactional
 class UserRepositoryStoredProcedureIntegrationTests {
 

@@ -46,7 +46,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -57,8 +56,7 @@ import org.springframework.data.jpa.domain.sample.Order;
 import org.springframework.data.jpa.domain.sample.User;
 import org.springframework.data.jpa.infrastructure.HibernateTestUtils;
 import org.springframework.data.mapping.PropertyPath;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Integration tests for {@link QueryUtils}.
@@ -70,8 +68,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Diego Krupitza
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:infrastructure.xml")
+@SpringJUnitConfig(locations = "classpath:infrastructure.xml")
 class QueryUtilsIntegrationTests {
 
 	@PersistenceContext EntityManager em;
@@ -282,7 +279,7 @@ class QueryUtilsIntegrationTests {
 	}
 
 	@Test // DATAJPA-763
-	@SuppressWarnings("unchecked")
+			@SuppressWarnings("unchecked")
 	void doesNotCreateAJoinForAlreadyFetchedAssociation() {
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();

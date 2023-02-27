@@ -27,7 +27,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
@@ -36,8 +35,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.jpa.domain.sample.Dummy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.jpa.repository.sample.DummyRepository;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -51,8 +49,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @see scripts/schema-stored-procedures.sql for procedure definitions.
  */
 @Transactional
-@ContextConfiguration(classes = StoredProcedureIntegrationTests.TestConfig.class)
-@ExtendWith(SpringExtension.class)
+@SpringJUnitConfig(classes = StoredProcedureIntegrationTests.TestConfig.class)
 class StoredProcedureIntegrationTests {
 
 	private static final String NOT_SUPPORTED = "Stored procedures with REF_CURSOR are currently not supported by HSQL dialect";
@@ -81,7 +78,7 @@ class StoredProcedureIntegrationTests {
 	}
 
 	@Test // DATAJPA-652
-	@Disabled(NOT_SUPPORTED)
+			@Disabled(NOT_SUPPORTED)
 	void shouldExecuteAdHocProcedureWith1InputAnd1OutputParameterWithResultSet() {
 
 		List<Dummy> dummies = repository.adHocProcedureWith1InputAnd1OutputParameterWithResultSet("FOO");
@@ -91,7 +88,7 @@ class StoredProcedureIntegrationTests {
 	}
 
 	@Test // DATAJPA-652
-	@Disabled(NOT_SUPPORTED)
+			@Disabled(NOT_SUPPORTED)
 	void shouldExecuteAdHocProcedureWith1InputAnd1OutputParameterWithResultSetWithUpdate() {
 
 		List<Dummy> dummies = repository.adHocProcedureWith1InputAnd1OutputParameterWithResultSetWithUpdate("FOO");
@@ -121,7 +118,7 @@ class StoredProcedureIntegrationTests {
 	}
 
 	@Test // DATAJPA-652
-	@Disabled(NOT_SUPPORTED)
+			@Disabled(NOT_SUPPORTED)
 	void shouldExecuteProcedureWith1InputAnd1OutputParameterWithResultSet() {
 
 		List<Dummy> dummies = repository.procedureWith1InputAnd1OutputParameterWithResultSet("FOO");
@@ -131,7 +128,7 @@ class StoredProcedureIntegrationTests {
 	}
 
 	@Test // DATAJPA-652
-	@Disabled(NOT_SUPPORTED)
+			@Disabled(NOT_SUPPORTED)
 	void shouldExecuteProcedureWith1InputAnd1OutputParameterWithResultSetWithUpdate() {
 
 		List<Dummy> dummies = repository.procedureWith1InputAnd1OutputParameterWithResultSetWithUpdate("FOO");
@@ -147,7 +144,7 @@ class StoredProcedureIntegrationTests {
 
 	@Configuration
 	@EnableJpaRepositories(basePackageClasses = DummyRepository.class,
-			includeFilters = { @Filter(pattern = ".*DummyRepository", type = FilterType.REGEX) })
+			includeFilters = {@Filter(pattern = ".*DummyRepository", type = FilterType.REGEX)})
 	static abstract class Config {}
 
 	@ImportResource("classpath:infrastructure.xml")

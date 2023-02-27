@@ -31,7 +31,6 @@ import java.util.stream.Stream;
 import org.hibernate.LazyInitializationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -46,8 +45,7 @@ import org.springframework.data.jpa.domain.sample.User;
 import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.data.querydsl.QSort;
 import org.springframework.data.querydsl.SimpleEntityPathResolver;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.types.Predicate;
@@ -67,8 +65,7 @@ import com.querydsl.core.types.dsl.PathBuilderFactory;
  * @author Greg Turnquist
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration({ "classpath:infrastructure.xml" })
+@SpringJUnitConfig(locations = {"classpath:infrastructure.xml"})
 @Transactional
 class QuerydslJpaPredicateExecutorUnitTests {
 

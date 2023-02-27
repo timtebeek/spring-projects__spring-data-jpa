@@ -24,7 +24,6 @@ import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -40,8 +39,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.QueryRewriter;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Unit tests for repository with {@link Query} and {@link QueryRewrite}.
@@ -49,8 +47,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Greg Turnquist
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration
+@SpringJUnitConfig
 class JpaQueryRewriteIntegrationTests {
 
 	@Autowired private UserRepositoryWithRewriter repository;
@@ -224,7 +221,7 @@ class JpaQueryRewriteIntegrationTests {
 	@Configuration
 	@ImportResource("classpath:infrastructure.xml")
 	@EnableJpaRepositories(considerNestedRepositories = true, basePackageClasses = UserRepositoryWithRewriter.class, //
-			includeFilters = @ComponentScan.Filter(value = { UserRepositoryWithRewriter.class },
+			includeFilters = @ComponentScan.Filter(value = {UserRepositoryWithRewriter.class},
 					type = FilterType.ASSIGNABLE_TYPE))
 	static class JpaRepositoryConfig {
 

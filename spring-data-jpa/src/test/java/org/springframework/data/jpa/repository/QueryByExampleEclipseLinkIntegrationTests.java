@@ -26,22 +26,19 @@ import jakarta.persistence.criteria.Root;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.convert.QueryByExamplePredicateBuilder;
 import org.springframework.data.jpa.domain.sample.Role;
 import org.springframework.data.jpa.repository.sample.RoleRepository;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Greg Turnquist
  * @since 3.0
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration({ "classpath:eclipselink.xml", "classpath:config/namespace-application-context.xml" })
+@SpringJUnitConfig(locations = {"classpath:eclipselink.xml", "classpath:config/namespace-application-context.xml"})
 @Transactional
 class QueryByExampleEclipseLinkIntegrationTests {
 

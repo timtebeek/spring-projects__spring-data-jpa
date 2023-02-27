@@ -28,7 +28,6 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.domain.Page;
@@ -42,8 +41,7 @@ import org.springframework.data.jpa.provider.PersistenceProvider;
 import org.springframework.data.jpa.repository.sample.RoleRepository;
 import org.springframework.data.jpa.repository.sample.UserRepository;
 import org.springframework.data.repository.query.QueryLookupStrategy;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,8 +52,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Krzysztof Krason
  * @see QueryLookupStrategy
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = "classpath:config/namespace-application-context.xml")
+@SpringJUnitConfig(locations = "classpath:config/namespace-application-context.xml")
 @Transactional
 class UserRepositoryFinderTests {
 
@@ -287,7 +284,7 @@ class UserRepositoryFinderTests {
 	}
 
 	@Test // DATAJPA-1023, DATACMNS-959
-	@Transactional(propagation = Propagation.NOT_SUPPORTED)
+			@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	void rejectsStreamExecutionIfNoSurroundingTransactionActive() {
 
 		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)

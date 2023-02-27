@@ -15,17 +15,14 @@
  */
 package org.springframework.data.jpa.repository.support;
 
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Hibernate execution for {@link JpaMetamodelEntityInformationIntegrationTests}.
  *
  * @author Greg Turnquist
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:infrastructure.xml")
+@SpringJUnitConfig(locations = "classpath:infrastructure.xml")
 class HibernateJpaMetamodelEntityInformationIntegrationTests
 		extends JpaMetamodelEntityInformationIntegrationTests {
 

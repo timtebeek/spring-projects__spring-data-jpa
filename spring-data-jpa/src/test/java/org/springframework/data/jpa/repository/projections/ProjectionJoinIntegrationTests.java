@@ -30,20 +30,17 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Reda.Housni-Alaoui
  */
 @Transactional
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = ProjectionsIntegrationTests.Config.class)
+@SpringJUnitConfig(classes = ProjectionsIntegrationTests.Config.class)
 class ProjectionJoinIntegrationTests {
 
 	@Autowired private UserRepository userRepository;

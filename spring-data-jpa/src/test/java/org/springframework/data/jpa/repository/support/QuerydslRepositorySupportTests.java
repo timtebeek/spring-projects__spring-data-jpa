@@ -25,11 +25,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.data.jpa.domain.sample.QUser;
 import org.springframework.data.jpa.domain.sample.User;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -40,8 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Jens Schauder
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration({ "classpath:infrastructure.xml" })
+@SpringJUnitConfig(locations = {"classpath:infrastructure.xml"})
 @Transactional
 class QuerydslRepositorySupportTests {
 
@@ -135,7 +132,7 @@ class QuerydslRepositorySupportTests {
 		}
 
 		@Override
-		@PersistenceContext(unitName = "default")
+				@PersistenceContext(unitName = "default")
 		public void setEntityManager(EntityManager entityManager) {
 			super.setEntityManager(entityManager);
 		}

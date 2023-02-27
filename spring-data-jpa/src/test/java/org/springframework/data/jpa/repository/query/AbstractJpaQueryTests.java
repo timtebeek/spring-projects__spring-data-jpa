@@ -35,7 +35,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.data.jpa.domain.sample.User;
 import org.springframework.data.jpa.provider.PersistenceProvider;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -45,8 +44,7 @@ import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.core.support.DefaultRepositoryMetadata;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -57,8 +55,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Mark Paluch
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:infrastructure.xml")
+@SpringJUnitConfig(locations = "classpath:infrastructure.xml")
 class AbstractJpaQueryTests {
 
 	@PersistenceContext EntityManager em;
@@ -67,7 +64,7 @@ class AbstractJpaQueryTests {
 	private TypedQuery<Long> countQuery;
 
 	@BeforeEach
-	@SuppressWarnings("unchecked")
+			@SuppressWarnings("unchecked")
 	void setUp() {
 		query = mock(Query.class);
 		countQuery = mock(TypedQuery.class);
@@ -118,7 +115,7 @@ class AbstractJpaQueryTests {
 	}
 
 	@Test // DATAJPA-466
-	@Transactional
+			@Transactional
 	void shouldAddEntityGraphHintForFetch() throws Exception {
 
 		assumeThat(currentEntityManagerIsAJpa21EntityManager(em)).isTrue();
@@ -134,7 +131,7 @@ class AbstractJpaQueryTests {
 	}
 
 	@Test // DATAJPA-466
-	@Transactional
+			@Transactional
 	void shouldAddEntityGraphHintForLoad() throws Exception {
 
 		assumeThat(currentEntityManagerIsAJpa21EntityManager(em)).isTrue();
@@ -161,14 +158,14 @@ class AbstractJpaQueryTests {
 
 	interface SampleRepository extends Repository<User, Integer> {
 
-		@QueryHints({ @QueryHint(name = "foo", value = "bar") })
+		@QueryHints({@QueryHint(name = "foo", value = "bar")})
 		List<User> findByLastname(String lastname);
 
-		@QueryHints(value = { @QueryHint(name = "bar", value = "foo") }, forCounting = false)
+		@QueryHints(value = {@QueryHint(name = "bar", value = "foo")}, forCounting = false)
 		List<User> findByFirstname(String firstname);
 
 		@Lock(LockModeType.PESSIMISTIC_WRITE)
-		@org.springframework.data.jpa.repository.Query("select u from User u where u.id = ?1")
+				@org.springframework.data.jpa.repository.Query("select u from User u where u.id = ?1")
 		List<User> findOneLocked(Integer primaryKey);
 
 		// DATAJPA-466

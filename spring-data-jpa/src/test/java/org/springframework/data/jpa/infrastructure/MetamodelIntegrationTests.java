@@ -35,19 +35,16 @@ import jakarta.persistence.metamodel.ManagedType;
 import jakarta.persistence.metamodel.Metamodel;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.data.jpa.domain.sample.User;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Oliver Gierke
  * @author Jens Schauder
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration({ "classpath:infrastructure.xml" })
+@SpringJUnitConfig(locations = {"classpath:infrastructure.xml"})
 abstract class MetamodelIntegrationTests {
 
 	@PersistenceContext EntityManager em;
@@ -83,7 +80,7 @@ abstract class MetamodelIntegrationTests {
 	}
 
 	@Test
-	@Transactional
+			@Transactional
 	void doesNotExposeAliasForTupleIfNoneDefined() {
 
 		User user = new User();
@@ -103,7 +100,7 @@ abstract class MetamodelIntegrationTests {
 	}
 
 	@Test
-	@Transactional
+			@Transactional
 	void returnsAliasesInTuple() {
 
 		User user = new User();

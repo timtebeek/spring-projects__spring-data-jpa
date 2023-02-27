@@ -19,13 +19,11 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.custom.UserCustomExtendedRepository;
 import org.springframework.data.jpa.repository.support.TransactionalRepositoryTests.DelegatingTransactionManager;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Annotation to exclude repository interfaces from being picked up and thus in consequence getting an instance being
@@ -40,8 +38,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Mark Paluch
  * @author Jens Schauder
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = "classpath:config/namespace-customfactory-context.xml")
+@SpringJUnitConfig(locations = "classpath:config/namespace-customfactory-context.xml")
 class CustomRepositoryFactoryConfigTests {
 
 	@Autowired(required = false) UserCustomExtendedRepository userRepository;

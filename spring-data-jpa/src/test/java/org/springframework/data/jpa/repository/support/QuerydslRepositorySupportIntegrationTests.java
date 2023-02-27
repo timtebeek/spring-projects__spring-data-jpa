@@ -21,7 +21,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,8 +29,7 @@ import org.springframework.data.jpa.domain.sample.User;
 import org.springframework.data.jpa.repository.config.InfrastructureConfig;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupportTests.UserRepositoryImpl;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,8 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Mark Paluch
  */
 @Transactional
-@ContextConfiguration
-@ExtendWith(SpringExtension.class)
+@SpringJUnitConfig
 class QuerydslRepositorySupportIntegrationTests {
 
 	@Configuration
@@ -54,7 +51,7 @@ class QuerydslRepositorySupportIntegrationTests {
 		public UserRepositoryImpl userRepositoryImpl() {
 			return new UserRepositoryImpl() {
 				@Override
-				@PersistenceContext(unitName = "querydsl")
+						@PersistenceContext(unitName = "querydsl")
 				public void setEntityManager(EntityManager entityManager) {
 					super.setEntityManager(entityManager);
 				}
@@ -82,7 +79,7 @@ class QuerydslRepositorySupportIntegrationTests {
 		}
 
 		@Override
-		@Bean
+				@Bean
 		public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
 			LocalContainerEntityManagerFactoryBean emf = super.entityManagerFactory();
@@ -125,7 +122,7 @@ class QuerydslRepositorySupportIntegrationTests {
 		}
 
 		@Override
-		@PersistenceContext(unitName = "querydsl")
+				@PersistenceContext(unitName = "querydsl")
 		public void setEntityManager(EntityManager entityManager) {
 			super.setEntityManager(entityManager);
 		}

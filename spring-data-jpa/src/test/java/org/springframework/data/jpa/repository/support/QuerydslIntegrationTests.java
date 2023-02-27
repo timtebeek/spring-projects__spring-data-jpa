@@ -24,12 +24,10 @@ import jakarta.persistence.PersistenceContext;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.sample.User;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.types.dsl.PathBuilder;
@@ -42,8 +40,7 @@ import com.querydsl.jpa.JPQLQuery;
  * @author Jens Schauder
  * @author Marcus Voltolim
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration({ "classpath:infrastructure.xml" })
+@SpringJUnitConfig(locations = {"classpath:infrastructure.xml"})
 @Transactional
 class QuerydslIntegrationTests {
 

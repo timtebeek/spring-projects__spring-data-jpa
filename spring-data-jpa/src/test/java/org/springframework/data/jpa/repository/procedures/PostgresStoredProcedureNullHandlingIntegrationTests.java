@@ -33,7 +33,6 @@ import javax.sql.DataSource;
 
 import org.hibernate.dialect.PostgreSQL91Dialect;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -50,8 +49,7 @@ import org.springframework.orm.jpa.AbstractEntityManagerFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,8 +61,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
  * @author Greg Turnquist
  */
 @Transactional
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = PostgresStoredProcedureNullHandlingIntegrationTests.Config.class)
+@SpringJUnitConfig(classes = PostgresStoredProcedureNullHandlingIntegrationTests.Config.class)
 class PostgresStoredProcedureNullHandlingIntegrationTests {
 
 	@Autowired TestModelRepository repository;
@@ -86,7 +83,7 @@ class PostgresStoredProcedureNullHandlingIntegrationTests {
 	class TestModel {
 
 		@Id
-		@GeneratedValue(strategy = GenerationType.AUTO) private long id;
+				@GeneratedValue(strategy = GenerationType.AUTO) private long id;
 		private UUID uuid;
 		private Date date;
 	}

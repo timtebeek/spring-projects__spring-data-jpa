@@ -6,11 +6,9 @@ import java.lang.reflect.Method;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.query.JpaParameters;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
@@ -20,8 +18,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
  *
  * @author Cedomir Igaly
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:hjppa-test.xml")
+@SpringJUnitConfig(locations = "classpath:hjppa-test.xml")
 class HibernateJpaParametersParameterAccessorUnitTests {
 
 	@Autowired private EntityManager em;

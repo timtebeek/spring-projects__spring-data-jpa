@@ -21,7 +21,6 @@ import jakarta.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
@@ -32,8 +31,7 @@ import org.springframework.data.jpa.domain.sample.Product;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.jpa.repository.sample.CategoryRepository;
 import org.springframework.data.jpa.repository.sample.ProductRepository;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
@@ -46,8 +44,7 @@ import org.springframework.transaction.support.TransactionTemplate;
  * @author Jens Schauder
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration
+@SpringJUnitConfig
 public abstract class PersistenceProviderIntegrationTests {
 
 	@Autowired CategoryRepository categories;
@@ -86,7 +83,7 @@ public abstract class PersistenceProviderIntegrationTests {
 	@Configuration
 	@ImportResource("classpath:infrastructure.xml")
 	@EnableJpaRepositories(basePackageClasses = CategoryRepository.class, //
-			includeFilters = @Filter(value = { CategoryRepository.class, ProductRepository.class },
+			includeFilters = @Filter(value = {CategoryRepository.class, ProductRepository.class},
 					type = FilterType.ASSIGNABLE_TYPE))
 	static class Config {
 

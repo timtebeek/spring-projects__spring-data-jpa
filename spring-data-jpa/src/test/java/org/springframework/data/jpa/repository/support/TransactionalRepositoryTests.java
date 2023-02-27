@@ -20,12 +20,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.sample.User;
 import org.springframework.data.jpa.repository.sample.UserRepository;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionException;
@@ -38,8 +36,7 @@ import org.springframework.transaction.TransactionStatus;
  * @author Jens Schauder
  * @author Krzysztof Krason
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration({ "classpath:config/namespace-autoconfig-context.xml", "classpath:tx-manager.xml" })
+@SpringJUnitConfig(locations = {"classpath:config/namespace-autoconfig-context.xml", "classpath:tx-manager.xml"})
 public class TransactionalRepositoryTests {
 
 	@Autowired UserRepository repository;

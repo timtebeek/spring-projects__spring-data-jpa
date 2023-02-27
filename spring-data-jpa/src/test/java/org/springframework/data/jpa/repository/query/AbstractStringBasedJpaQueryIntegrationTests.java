@@ -26,7 +26,6 @@ import java.lang.reflect.Method;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -40,8 +39,7 @@ import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.core.support.DefaultRepositoryMetadata;
 import org.springframework.data.repository.query.QueryMethodEvaluationContextProvider;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * Integration tests for {@link AbstractStringBasedJpaQuery}.
@@ -50,8 +48,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Greg Turnquist
  * @soundtrack Henrik Freischlader Trio - Nobody Else To Blame (Openness)
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:infrastructure.xml")
+@SpringJUnitConfig(locations = "classpath:infrastructure.xml")
 class AbstractStringBasedJpaQueryIntegrationTests {
 
 	@PersistenceContext EntityManager em;

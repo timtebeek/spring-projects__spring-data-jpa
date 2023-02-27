@@ -24,7 +24,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,8 +40,7 @@ import org.springframework.data.jpa.domain.sample.QMailMessage;
 import org.springframework.data.jpa.domain.sample.QMailSender;
 import org.springframework.data.jpa.repository.sample.MailMessageRepository;
 import org.springframework.data.jpa.repository.sample.SampleConfig;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -52,8 +50,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Oliver Gierke
  * @author Jens Schauder
  */
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = SampleConfig.class)
+@SpringJUnitConfig(classes = SampleConfig.class)
 @Transactional
 class MailMessageRepositoryIntegrationTests {
 
